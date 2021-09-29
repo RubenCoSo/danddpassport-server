@@ -9,7 +9,7 @@ const router = express.Router();
 const saltRounds = 10;
 
 
-// POST /auth/signup  - Creates a new user in the database hola
+// POST /auth/signup  - Creates a new user in the database
 router.post('/signup', (req, res, next) => {
   const { email, password, name , rol} = req.body;
 
