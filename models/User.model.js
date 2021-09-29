@@ -9,6 +9,20 @@ const userSchema = new Schema({
     type: String,
     enum: ["master", "player"],
   },
+
+  characters: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Character",
+    },
+  ],
+
+  adventures: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Adventure",
+    },
+  ],
 });
 
 module.exports = model("User", userSchema);
