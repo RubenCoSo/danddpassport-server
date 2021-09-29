@@ -6,6 +6,8 @@ const characterSchema = new Schema({
 
   characterName: { type: String, unique: true },
 
+  level: Number,
+
   race: String,
 
   class: String,
@@ -19,12 +21,31 @@ const characterSchema = new Schema({
     cha: Number,
   },
 
-  adventures: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Adventure",
-    },
-  ],
+  savingThrows:{
+    str: Number,
+    con: Number,
+    dex: Number,
+    int: Number,
+    wis: Number,
+    cha: Number,
+  },
+
+  skills:[Object],   //character.findbyid(idpersonaje)+> response.data.skills.indexof(ac
+
+  weapons:Array,
+
+  Attacks: Array,
+  
+  spellcasting: Array,
+
+  armor: Number,
+
+  initiative: Number,
+
+  speed: Number,
+
+  hitdice: String,
+
 });
 
 const Character = model("Character", characterSchema);
