@@ -9,6 +9,7 @@ router.post("/newCharacter" , (req, res, next) => {
 
   Character.create({ characterName: name, race, class: characterClass })
     .then((newCharacter) => {
+      res.json(newCharacter) 
       console.log()
        User.findByIdAndUpdate(userId, {
         $push:{characters: newCharacter._id }
