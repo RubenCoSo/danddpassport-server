@@ -6,8 +6,10 @@ const User = require("../models/User.model")
 
 
 
-router.put('/chooserol/player',(req,res) => {
-    User.findByIdAndUpdate(req.body, {rol:"player"}, { new: true })
+router.put('/chooserol/:rol',(req,res) => {
+   const {_id} = req.body
+   const {rol} = req.params
+    User.findByIdAndUpdate({_id}, {rol}, { new: true })
     .then((updatedUser) => res.json(updatedUser))
     .catch((error) => res.json(error));
 } )
