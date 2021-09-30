@@ -50,4 +50,4 @@ const characterSchema = new Schema({
 
 const Character = model("Character", characterSchema);
 
-module.exports = User;
+module.exports = Character;

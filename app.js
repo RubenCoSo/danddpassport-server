@@ -22,6 +22,11 @@ app.use("/api", isAuthenticated, mainRouter);            // <== UPDATE
 const taskRouter = require("./routes/task.routes");
 app.use("/api",isAuthenticated, taskRouter);
 
+const characterRouter = require("./routes/character.routes");
+app.use("/api",isAuthenticated, characterRouter);
+
+
+
 
 
 
