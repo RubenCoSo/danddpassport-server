@@ -22,4 +22,13 @@ router.post("/newCharacter" , (req, res, next) => {
     
     .catch((err) => res.json(err));
 });
+
+router.put("/character", (req, res, next) => {
+  const {strength, constitution, dexterity, wisdom, inteligence, charisma, characterId} = req.body;
+  Character.findByIdAndUpdate(characterId, {stats:{str:strength,con:constitution,dex:dexterity,int:inteligence,wis:wisdom,cha:charisma}}, {new:true})
+  .then((response) =>  res.json(response)) 
+
+})
+
+
 module.exports = router;
