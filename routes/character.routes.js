@@ -9,19 +9,18 @@ router.post("/newCharacter" , (req, res, next) => {
 
   Character.create({ characterName: name, race, class: characterClass })
     .then((newCharacter) => {
-      res.json(newCharacter) 
       console.log()
        User.findByIdAndUpdate(userId, {
         $push:{characters: newCharacter._id }
       },{new:true})
+      res.json(newCharacter) 
 
-    
-      
-      .then((response) =>  res.json(response)) 
     })
     
     .catch((err) => res.json(err));
 });
+
+
 
 router.put("/character", (req, res, next) => {
   const {strength, constitution, dexterity, wisdom, inteligence, charisma, characterId, speed, traits, image, languages} = req.body;
@@ -36,9 +35,11 @@ router.get("/character/:id",(req,res)=>{
 
   Character.findById(id)
   .then((character)=> res.json(character))
-
+  .catch((err) => res.json(err))
 
 })
+
+
 
 
 module.exports = router;
