@@ -31,4 +31,14 @@ router.put("/character", (req, res, next) => {
 })
 
 
+router.get("/character/:id",(req,res)=>{
+  const id = req.params.id
+
+  Character.findById(id)
+  .then((character)=> res.json(character))
+
+
+})
+
+
 module.exports = router;
