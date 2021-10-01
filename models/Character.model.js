@@ -46,6 +46,12 @@ const characterSchema = new Schema({
 
   hitdice: String,
 
+  image: String,
+
+  traits: Array,
+
+  laguages: Array
+
 });
 
 const Character = model("Character", characterSchema);
