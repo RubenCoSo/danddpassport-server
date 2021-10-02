@@ -9,11 +9,12 @@ router.post("/newCharacter" , (req, res, next) => {
 
   Character.create({ characterName: name, race, class: characterClass })
     .then((newCharacter) => {
-      console.log()
+      res.json(newCharacter)
        User.findByIdAndUpdate(userId, {
         $push:{characters: newCharacter._id }
       },{new:true})
-      res.json(newCharacter) 
+      .then((modUser)=>console.log(modUser))
+      
 
     })
     
@@ -23,8 +24,8 @@ router.post("/newCharacter" , (req, res, next) => {
 
 
 router.put("/character", (req, res, next) => {
-  const {strength, constitution, dexterity, wisdom, inteligence, charisma, characterId, speed, traits, image, languages} = req.body;
-  Character.findByIdAndUpdate(characterId, {stats:{str:strength,con:constitution,dex:dexterity,int:inteligence,wis:wisdom,cha:charisma}, speed, traits, image, languages}, {new:true})
+  const {strength, constitution, dexterity, wisdom, intelligence, charisma, characterId, speed, traits, image, languages} = req.body;
+  Character.findByIdAndUpdate(characterId, {stats:{str:strength,con:constitution,dex:dexterity,int:intelligence,wis:wisdom,cha:charisma}, speed, traits, image, languages}, {new:true})
   .then((response) =>  res.json(response)) 
 
 })
