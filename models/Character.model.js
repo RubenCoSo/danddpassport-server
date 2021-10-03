@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 // TODO: Please make sure you edit the user model to whatever makes sense in this case
 const characterSchema = new Schema({
-  created_by: { type: Schema.Types.ObjectId, ref: "User" },
+  created_by: [{ type: Schema.Types.ObjectId, ref: "User" }],
 
   characterName: { type: String, unique: true },
 
@@ -11,6 +11,8 @@ const characterSchema = new Schema({
   race: String,
 
   class: String,
+
+  hp: Number,
 
   stats: {
     str: Number,
@@ -21,20 +23,15 @@ const characterSchema = new Schema({
     cha: Number,
   },
 
-  savingThrows:{
-    str: Number,
-    con: Number,
-    dex: Number,
-    int: Number,
-    wis: Number,
-    cha: Number,
-  },
+  savingThrows:Array,
 
-  skills:[Object],   //character.findbyid(idpersonaje)+> response.data.skills.indexof(ac
+  skills:Array,
+  
+  basicSkills:Array,
 
-  weapons:Array,
+  equipment:Array,
 
-  Attacks: Array,
+  attacks: Array,
   
   spellcasting: Array,
 
@@ -44,7 +41,9 @@ const characterSchema = new Schema({
 
   speed: Number,
 
-  hitdice: String,
+  hitDice: Number,
+
+  hitDiceThrow:Number,
 
   image: String,
 

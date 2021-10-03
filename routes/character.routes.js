@@ -27,6 +27,40 @@ router.put("/character", (req, res, next) => {
   const {strength, constitution, dexterity, wisdom, intelligence, charisma, characterId, speed, traits, image, languages} = req.body;
   Character.findByIdAndUpdate(characterId, {stats:{str:strength,con:constitution,dex:dexterity,int:intelligence,wis:wisdom,cha:charisma}, speed, traits, image, languages}, {new:true})
   .then((response) =>  res.json(response)) 
+  .catch((err) => res.json(err))
+
+})
+
+router.put("/character/skills", (req, res, next) => {
+  const {selectedSkills, selectedBasicSkills, characterId} = req.body;
+  console.log(`selectedSkills`,selectedSkills,`selectedBasicSkills`, selectedBasicSkills, characterId)
+  Character.findByIdAndUpdate(characterId, {skills:[...skills,selectedSkills], basicSkills:[...basicSkills,selectedBasicSkills]}, {new:true})
+  .then((response) =>  res.json(response)) 
+  .catch((err) => res.json(err))
+
+})
+
+router.put("/character/skillParameters", (req, res, next) => {
+  const {diceHits, skillsPerClass, characterId} = req.body;
+  Character.findByIdAndUpdate(characterId, {skills:[...skills,skillsPerClass], hitDice:diceHits}, {new:true})
+  .then((response) =>  res.json(response)) 
+  .catch((err) => res.json(err))
+
+})
+
+router.put("/character/Equipment", (req, res, next) => {
+  const {selectedEquipment, characterId} = req.body;
+  Character.findByIdAndUpdate(characterId, {equipment:[...equipment,selectedEquipment]}, {new:true})
+  .then((response) =>  res.json(response)) 
+  .catch((err) => res.json(err))
+
+})
+
+router.put("/character/equipmentParameters", (req, res, next) => {
+  const {equipmentPerClass, hitDiceThrow, characterId} = req.body;
+  Character.findByIdAndUpdate(characterId, {equipment:[...equipment,equipmentPerClass], hitDiceThrow}, {new:true})
+  .then((response) =>  res.json(response)) 
+  .catch((err) => res.json(err))
 
 })
 
@@ -36,7 +70,7 @@ router.get("/character/:id",(req,res)=>{
 
   Character.findById(id)
   .then((character)=> res.json(character))
-  .catch((err) => res.json(err))
+  
 
 })
 
