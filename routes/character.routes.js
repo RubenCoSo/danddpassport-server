@@ -32,27 +32,21 @@ router.put("/character", (req, res, next) => {
 })
 
 router.put("/character/skills", (req, res, next) => {
-  const {selectedSkills, selectedBasicSkills, characterId} = req.body;
-  console.log(`selectedSkills`,selectedSkills,`selectedBasicSkills`, selectedBasicSkills, characterId)
-  Character.findByIdAndUpdate(characterId, {skills:[...skills,selectedSkills], basicSkills:[...basicSkills,selectedBasicSkills]}, {new:true})
-  .then((response) =>  res.json(response)) 
-  .catch((err) => res.json(err))
-
-})
-
-router.put("/character/skillParameters", (req, res, next) => {
-  const {diceHits, skillsPerClass, characterId} = req.body;
-  Character.findByIdAndUpdate(characterId, {skills:[...skills,skillsPerClass], hitDice:diceHits}, {new:true})
-  .then((response) =>  res.json(response)) 
-  .catch((err) => res.json(err))
+  const {diceHits, skillsPerClass,choosedSkills, choosedBasicSkills, characterId} = req.body;
+  console.log(req.body);
+  let skills = [...skillsPerClass,...choosedSkills]
+  Character.findByIdAndUpdate(characterId, 
+    {skills: skills, basicSkills: choosedBasicSkills, hitDice:diceHits },{new:true})
+  .then((response) =>{console.log(response); res.json(response)}) 
+  .catch((err) => console.log(err))
 
 })
 
 router.put("/character/Equipment", (req, res, next) => {
   const {selectedEquipment, characterId} = req.body;
   Character.findByIdAndUpdate(characterId, {equipment:[...equipment,selectedEquipment]}, {new:true})
-  .then((response) =>  res.json(response)) 
-  .catch((err) => res.json(err))
+  .then((response) => {console.log(response); res.json(response)}) 
+  .catch((err) => console.log(err))
 
 })
 
