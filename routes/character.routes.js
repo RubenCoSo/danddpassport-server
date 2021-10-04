@@ -68,6 +68,14 @@ router.get("/character/:id",(req,res)=>{
 
 })
 
+router.post("/delete", (req,res)=>{
+   const {character} =req.body;
+   Character.findByIdAndDelete(character)
+   .then((reponse)=> res.json(response))
+   .catch((err) => res.json(err))
+
+} )
+
 
 
 
