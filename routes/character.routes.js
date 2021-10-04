@@ -42,18 +42,14 @@ router.put("/character/skills", (req, res, next) => {
 
 })
 
-router.put("/character/Equipment", (req, res, next) => {
-  const {selectedEquipment, characterId} = req.body;
-  Character.findByIdAndUpdate(characterId, {equipment:[...equipment,selectedEquipment]}, {new:true})
-  .then((response) => {console.log(response); res.json(response)}) 
-  .catch((err) => console.log(err))
-
-})
-
-router.put("/character/equipmentParameters", (req, res, next) => {
-  const {equipmentPerClass, hitDiceThrow, characterId} = req.body;
-  Character.findByIdAndUpdate(characterId, {equipment:[...equipment,equipmentPerClass], hitDiceThrow}, {new:true})
-  .then((response) =>  res.json(response)) 
+router.put("/character/equipment", (req, res, next) => {
+  const {equipmentPerClass, hitDiceThrow, choosedEquipment, savingThrows, characterId} = req.body;
+  const equipment = [...equipmentPerClass,...choosedEquipment]
+  Character.findByIdAndUpdate(characterId, {equipment:equipment,savingThrows:savingThrows,hitDiceThrow: hitDiceThrow}, {new:true})
+  .then((response) =>  {
+    console.log(response); 
+    res.json(response)
+  })  
   .catch((err) => res.json(err))
 
 })
