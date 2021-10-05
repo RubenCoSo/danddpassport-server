@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 // TODO: Please make sure you edit the user model to whatever makes sense in this case
 const characterSchema = new Schema({
-  created_by: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  created_by: String,
 
   characterName: { type: String, unique: true },
 
@@ -49,7 +49,7 @@ const characterSchema = new Schema({
 
   traits: Array,
 
-  laguages: Array
+  languages: Array
 
 });
 

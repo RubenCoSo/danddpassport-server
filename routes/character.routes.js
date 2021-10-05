@@ -5,9 +5,9 @@ const Character = require("../models/Character.model");
 const User = require("../models/User.model");
 
 router.post("/newCharacter" , (req, res, next) => {
-  const { name, race, characterClass, userId } = req.body;
+  const { name, race, characterClass, created_by, userId } = req.body;
 
-  Character.create({ characterName: name, race, class: characterClass })
+  Character.create({ characterName: name, race, class: characterClass, created_by })
     .then((newCharacter) => {
       res.json(newCharacter)
        User.findByIdAndUpdate(userId, {
