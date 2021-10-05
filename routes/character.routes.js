@@ -54,6 +54,16 @@ router.put("/character/equipment", (req, res, next) => {
 
 })
 
+router.put("/characteredit", (req, res, next) =>{
+  const {skills,equipment,basicSkills,level,strength,wisdom,charisma,intelligence,dexterity,constitution} = req.body;
+  Character.findByIdAndUpdate( )
+  .then((response) =>  {
+    console.log(response); 
+    res.json(response)
+  })  
+  .catch((err) => res.json(err))
+})
+
 
 router.get("/character/:id",(req,res)=>{
   const id = req.params.id
@@ -71,6 +81,7 @@ router.post("/delete", (req,res)=>{
    .catch((err) => res.json(err))
 
 } )
+
 
 
 
