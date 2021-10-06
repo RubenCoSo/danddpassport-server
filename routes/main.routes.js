@@ -17,7 +17,7 @@ router.get('/user/:id',(req,res)=>{
 router.put('/user/:rol',(req,res) => {
    const {_id} = req.body
    const {rol} = req.params
-    User.findByIdAndUpdate({_id}, {rol}, { new: true })
+    User.findByIdAndUpdate(_id, {rol}, { new: true })
     .then((updatedUser) => res.json(updatedUser))
     .catch((error) => res.json(error));
 } )
