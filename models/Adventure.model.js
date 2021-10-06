@@ -1,10 +1,11 @@
 const { Schema, model } = require("mongoose");
 
 const adventureSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
+  created_by: String,
+
+  title: { type: String, unique: true },
+
+  description: String,
 
   characters: [
     {
@@ -13,12 +14,16 @@ const adventureSchema = new Schema({
     },
   ],
 
+
   monsters: [
     {
-      trype: Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Monster",
     },
   ],
 });
 
 const Adventure = model("Adventure", adventureSchema);
+
+
+module.exports = Adventure;

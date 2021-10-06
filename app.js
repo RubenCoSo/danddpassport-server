@@ -19,11 +19,13 @@ app.use("/api/auth", authRouter);
 const mainRouter = require("./routes/main.routes");
 app.use("/api", isAuthenticated, mainRouter);            // <== UPDATE
 
-const taskRouter = require("./routes/task.routes");
-app.use("/api",isAuthenticated, taskRouter);
+const adventureRouter = require("./routes/adventure.routes");
+app.use("/api",isAuthenticated, adventureRouter);
 
 const characterRouter = require("./routes/character.routes");
 app.use("/api",isAuthenticated, characterRouter);
+
+
 
 
 
