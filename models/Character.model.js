@@ -15,12 +15,12 @@ const characterSchema = new Schema({
   hp: Number,
 
   stats: {
-    str: Number,
-    con: Number,
-    dex: Number,
-    int: Number,
-    wis: Number,
-    cha: Number,
+    str: {type:Number, default: 0} ,
+    con: {type:Number, default: 0} ,
+    dex: {type:Number, default: 0} ,
+    int: {type:Number, default: 0} ,
+    wis: {type:Number, default: 0} ,
+    cha: {type:Number, default: 0} ,
   },
 
   savingThrows:Array,

@@ -55,8 +55,19 @@ router.put("/character/equipment", (req, res, next) => {
 })
 
 router.put("/editCharacter", (req, res, next) =>{
+  console.log("body",req.body )
   const {skills,equipment,basicSkills,level,strength,wisdom,charisma,intelligence,dexterity,constitution, characterId} = req.body;
-  Character.findByIdAndUpdate(characterId,{skills:skills,equipment:equipment, basicSkills:basicSkills, level:level,stats:{str:strength,con:constitution,dex:dexterity,int:intelligence,wis:wisdom,cha:charisma} })
+  const stats = {}
+  strength ? stats.str = strength : null;
+  wisdom ? stats.wis = wisdom : null;
+  charisma ? stats.cha = charisma : null;
+  intelligence ? stats.int = intelligence : null;
+  dexterity ? stats.dex = dexterity : null;
+  constitution ? stats.con = constitution : null;
+  
+  
+
+  Character.findByIdAndUpdate(characterId,{skills:skills,equipment:equipment, basicSkills:basicSkills, level:level,stats},{new:true})
   .then((response) =>  {
     console.log(response); 
     res.json(response)
