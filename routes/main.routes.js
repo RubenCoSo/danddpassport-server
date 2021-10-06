@@ -8,6 +8,7 @@ router.get('/user/:id',(req,res)=>{
     console.log(`user`,req.params)
     User.findById(req.params.id)
     .populate('characters')
+    .populate('adventures')
     .then((user)=>res.json(user))
     .catch((error) => res.json(error));
 })
