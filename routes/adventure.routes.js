@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const Character = require("../models/Character.model");
 const User = require("../models/User.model");
 const Adventure = require("../models/Adventure.model")
+const Monster = require("../models/Monster.model")
 
 
 
@@ -43,6 +44,23 @@ router.put('/adventureCharacters',(req,res)=>{
   })
 })
 
+router.post('/adventureMonsters', (req,res)=>{
+  const { adventureId, addedMonsters} =req.body
+
+  addedMonsters.forEach((monster)=>{
+    Monster.create({name:monster})
+    .then((addedMonster)=>{
+      Adventure.findByIdAndUpdate(adventureId,{$push:{monsters:addedMonster._id}})
+      .then((modAdv)=>{
+        return res.json(modAdv)
+      })
+      .catch((err) => res.json(err));
+    })
+  })
+})
+
+
+
 
 router.get('/charactersInAdventure/:id',(req,res)=>{
 
@@ -50,6 +68,16 @@ router.get('/charactersInAdventure/:id',(req,res)=>{
 
   Adventure.findById(adventureId)
     .populate('characters')
+    .then((adventure)=>res.json(adventure))
+    .catch((err) => res.json(err));
+})
+
+router.get('/monstersInAdventure/:id',(req,res)=>{
+
+  const adventureId = req.params.id
+
+  Adventure.findById(adventureId)
+    .populate('monsters')
     .then((adventure)=>res.json(adventure))
     .catch((err) => res.json(err));
 })
