@@ -67,6 +67,14 @@ router.post('/deleteMonster', (req,res)=>{
   .catch((err) => res.json(err));
 })
 
+router.post('/deleteAdventure', (req,res)=>{
+
+  const {adventure} = req.body
+  Adventure.findByIdAndDelete(adventure)
+  .then((adventure)=> res.json(adventure))
+  .catch((err) => res.json(err));
+})
+
 
 
 
